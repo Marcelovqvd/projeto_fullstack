@@ -15,4 +15,14 @@ describe('UsersService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  it('should create a user', () => {
+    const user = service.create({
+      name: 'Marcelo',
+      email: 'marcelovqvd@gmail.com',
+      password: '123456',
+    });
+
+    expect(user.name).toBe('Marcelo');
+  });
 });
