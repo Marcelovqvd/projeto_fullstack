@@ -9,8 +9,8 @@ export const databaseProviders = [
         host: 'localhost',
         port: 5432,
         username: 'root',
-        password: '123456',
-        database: 'postgres',
+        password: '123',
+        database: 'hublocal',
         entities: ['dist/**/*.entity.js'],
         synchronize: true,
       });

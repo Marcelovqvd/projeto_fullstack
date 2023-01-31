@@ -8,9 +8,9 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity()
+@Entity('users')
 @Unique(['email'])
-export class User extends BaseEntity {
+export class Users extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
