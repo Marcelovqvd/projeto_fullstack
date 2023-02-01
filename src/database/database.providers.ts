@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 
 export const databaseProviders = [
@@ -12,7 +13,8 @@ export const databaseProviders = [
         password: '123',
         database: 'hublocal',
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-        synchronize: true,
+        migrations: [__dirname + './migrations/*.ts'],
+        synchronize: false,
       });
 
       return dataSource.initialize();
