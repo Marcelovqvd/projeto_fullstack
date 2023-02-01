@@ -11,7 +11,7 @@ export const databaseProviders = [
         username: 'root',
         password: '123',
         database: 'hublocal',
-        entities: ['dist/**/*.entity.js'],
+        entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         synchronize: true,
       });
 

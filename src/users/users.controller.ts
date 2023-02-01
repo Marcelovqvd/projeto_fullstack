@@ -13,10 +13,10 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private usersService: UsersService) {}
 
   @Post()
-  async create(@Body() createUserDto: CreateUserDto): Promise<void> {
+  create(@Body() createUserDto: CreateUserDto) {
     this.usersService.create(createUserDto);
   }
 
