@@ -15,7 +15,12 @@ export class LocationsService {
     try {
       const newLocation = this.localtionsRepository.create({
         name: createLocationDto.name,
-        address: createLocationDto.address,
+        cep: createLocationDto.cep,
+        rua: createLocationDto.rua,
+        numero: createLocationDto.numero,
+        bairro: createLocationDto.bairro,
+        cidade: createLocationDto.cidade,
+        estado: createLocationDto.estado,
         createdAt: new Date(),
         updatedAt: new Date(),
       });
@@ -63,7 +68,7 @@ export class LocationsService {
     try {
       const location = await this.localtionsRepository.findOneBy({ id });
 
-      if (!location) throw new Error('User not found.');
+      if (!location) throw new Error('Local não encontrado.');
 
       await this.localtionsRepository
         .createQueryBuilder()

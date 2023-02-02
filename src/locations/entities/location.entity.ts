@@ -1,4 +1,3 @@
-import { MAX_LENGTH } from 'class-validator';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -6,7 +5,6 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { ILocation } from '../interfaces/ILocationInterface';
 
 @Entity()
 export class Location {
@@ -17,7 +15,22 @@ export class Location {
   name: string;
 
   @Column({ nullable: false, type: 'varchar' })
-  address: ILocation;
+  cep: string;
+
+  @Column({ nullable: false, type: 'varchar' })
+  rua: string;
+
+  @Column({ nullable: false, type: 'varchar' })
+  numero: number;
+
+  @Column({ nullable: false, type: 'varchar' })
+  bairro: string;
+
+  @Column({ nullable: false, type: 'varchar' })
+  cidade: string;
+
+  @Column({ nullable: false, type: 'varchar' })
+  estado: string;
 
   @CreateDateColumn()
   createdAt: Date;

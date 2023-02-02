@@ -1,11 +1,25 @@
-import { IsString } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 import { Location } from '../entities/location.entity';
-import { ILocation } from '../interfaces/ILocationInterface';
 
 export class CreateLocationDto extends Location {
   @IsString()
-  address: ILocation;
+  name: string;
 
   @IsString()
-  name: string;
+  cep: string;
+
+  @IsString()
+  rua: string;
+
+  @IsNumber()
+  numero: number;
+
+  @IsString()
+  bairro: string;
+
+  @IsString()
+  cidade: string;
+
+  @IsString()
+  estado: string;
 }
