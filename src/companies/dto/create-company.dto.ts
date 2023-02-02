@@ -1,8 +1,14 @@
-import { IsString, Matches, MaxLength, MinLength } from 'class-validator';
+import {
+  IsFQDN,
+  IsString,
+  Matches,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 import { Companies } from '../entities/company.entity';
 
 export class CreateCompanyDto extends Companies {
-  @IsString()
+  @IsFQDN()
   website: string;
 
   @IsString()

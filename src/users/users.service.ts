@@ -73,18 +73,22 @@ export class UsersService {
   }
 
   async remove(id: number): Promise<void> {
-    const user = await this.usersRepository.findOneBy({ id });
+    try {
+      const user = await this.usersRepository.findOneBy({ id });
 
-    if (!user) throw new Error('User not found.');
+      if (!user) throw new Error('User not found.');
 
-    await this.usersRepository
-      .createQueryBuilder()
-      .delete()
-      .from(Users)
-      .where('id = :id', { id: 1 })
-      .execute();
+      await this.usersRepository
+        .createQueryBuilder()
+        .delete()
+        .from(Users)
+        .where('id = :id', { id: 1 })
+        .execute();
 
-    await this.usersRepository.delete(user);
-    return;
+      await this.usersRepository.delete(user);
+      return;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 }
