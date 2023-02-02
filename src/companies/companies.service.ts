@@ -1,26 +1,82 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { Repository } from 'typeorm';
 import { CreateCompanyDto } from './dto/create-company.dto';
 import { UpdateCompanyDto } from './dto/update-company.dto';
+import { Companies } from './entities/company.entity';
 
 @Injectable()
 export class CompaniesService {
-  create(createCompanyDto: CreateCompanyDto) {
-    return 'This action adds a new company';
+  constructor(
+    @Inject('COMPANIES_REPOSITORY')
+    private companiesRepository: Repository<Companies>,
+  ) {}
+
+  async create(createCompanyDto: CreateCompanyDto) {
+    try {
+      const newCompany = this.companiesRepository.create({
+        name: createCompanyDto.name,
+        website: createCompanyDto.website,
+        cnpj: createCompanyDto.cnpj,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
+
+      await this.companiesRepository.save(newCompany);
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
-  findAll() {
-    return `This action returns all companies`;
+  async findAll() {
+    try {
+      const companiesList = await this.companiesRepository.find();
+      return companiesList;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} company`;
+  async update(id: number, updateCompanyDto: UpdateCompanyDto) {
+    try {
+      const company = await this.companiesRepository.findOneBy({ id });
+
+      if (!company) throw new Error('Empresa não encontrada.');
+
+      await this.companiesRepository
+        .createQueryBuilder()
+        .update()
+        .set({
+          ...updateCompanyDto,
+          updatedAt: new Date(),
+        })
+        .where('id = :id', {
+          id: id,
+        })
+        .execute();
+
+      return;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
-  update(id: number, updateCompanyDto: UpdateCompanyDto) {
-    return `This action updates a #${id} company`;
-  }
+  async remove(id: number): Promise<void> {
+    try {
+      const company = await this.companiesRepository.findOneBy({ id });
 
-  remove(id: number) {
-    return `This action removes a #${id} company`;
+      if (!company) throw new Error('Empresa não encontrada.');
+
+      await this.companiesRepository
+        .createQueryBuilder()
+        .delete()
+        .from(Companies)
+        .where('id = :id', { id: 1 })
+        .execute();
+
+      await this.companiesRepository.delete(company);
+      return;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 }

@@ -14,7 +14,7 @@ export const databaseProviders = [
         database: 'hublocal',
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         migrations: [__dirname + './migrations/*.ts'],
-        synchronize: false,
+        synchronize: true,
       });
 
       return dataSource.initialize();
