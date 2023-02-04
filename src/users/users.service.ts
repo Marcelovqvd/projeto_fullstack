@@ -28,6 +28,14 @@ export class UsersService {
     }
   }
 
+  async findByEmail(email: string): Promise<Users | undefined> {
+    const user = await this.usersRepository.findOneBy({ email });
+
+    if (!user) throw new Error('Usuário não existente');
+
+    return user;
+  }
+
   async findAll(): Promise<Users[]> {
     try {
       const usersList = await this.usersRepository.find();
