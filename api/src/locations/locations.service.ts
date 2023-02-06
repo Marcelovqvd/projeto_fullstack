@@ -40,7 +40,7 @@ export class LocationsService {
     }
   }
 
-  async update(id: number, updateLocationDto: UpdateLocationDto) {
+  async update(id: string, updateLocationDto: UpdateLocationDto) {
     try {
       const location = await this.localtionsRepository.findOneBy({ id });
 
@@ -64,7 +64,7 @@ export class LocationsService {
     }
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     try {
       const location = await this.localtionsRepository.findOneBy({ id });
 

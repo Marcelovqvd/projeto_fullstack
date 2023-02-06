@@ -36,7 +36,7 @@ export class CompaniesService {
     }
   }
 
-  async update(id: number, updateCompanyDto: UpdateCompanyDto) {
+  async update(id: string, updateCompanyDto: UpdateCompanyDto) {
     try {
       const company = await this.companiesRepository.findOneBy({ id });
 
@@ -60,7 +60,7 @@ export class CompaniesService {
     }
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: string): Promise<void> {
     try {
       const company = await this.companiesRepository.findOneBy({ id });
 

@@ -14,6 +14,14 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto): Promise<void> {
     try {
+      const userAlreadyExists = await this.usersRepository.findOne({
+        where: { email: createUserDto.email },
+      });
+
+      if (createUserDto.email === userAlreadyExists.email) {
+        throw new Error('User already existsssss');
+      }
+
       const newUser = this.usersRepository.create({
         name: createUserDto.name,
         email: createUserDto.email,
@@ -21,6 +29,9 @@ export class UsersService {
         createdAt: new Date(),
         updatedAt: new Date(),
       });
+
+      //console.log(userAlreadyExists.email);
+      console.log(createUserDto.email);
 
       await this.usersRepository.save(newUser);
     } catch (error) {
@@ -44,7 +55,7 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  async findOne(id: number): Promise<Users> {
+  async findOne(id: string): Promise<Users> {
     try {
       const user = await this.usersRepository.findOneBy({ id });
 
@@ -56,7 +67,7 @@ export class UsersService {
     }
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto): Promise<void> {
+  async update(id: string, updateUserDto: UpdateUserDto): Promise<void> {
     try {
       const user = await this.usersRepository.findOneBy({ id });
 
@@ -80,7 +91,7 @@ export class UsersService {
     }
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: string): Promise<void> {
     try {
       const user = await this.usersRepository.findOneBy({ id });
 

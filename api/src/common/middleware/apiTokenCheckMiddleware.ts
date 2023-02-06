@@ -8,7 +8,7 @@ export class ApiTokenCheckMiddleware implements NestMiddleware {
 
     if (!authToken) {
       return res.status(401).json({
-        message: 'Toekn is missing',
+        message: 'Token is missing',
       });
     }
 

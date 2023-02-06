@@ -28,6 +28,7 @@ export class AppModule implements NestModule {
       .apply(ApiTokenCheckMiddleware)
       .exclude(
         { path: 'users', method: RequestMethod.POST },
+        { path: 'users/create', method: RequestMethod.POST },
         { path: 'login', method: RequestMethod.ALL },
       )
       .forRoutes({ path: '*', method: RequestMethod.ALL });

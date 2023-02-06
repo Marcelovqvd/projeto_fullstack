@@ -1,3 +1,4 @@
+import { Users } from 'src/users/entities/user.entity';
 import {
   Entity,
   Unique,
@@ -5,13 +6,14 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from 'typeorm';
 
 @Entity()
 @Unique(['cnpj'])
 export class Companies {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column({ nullable: false, type: 'varchar', length: 100 })
   name: string;
@@ -27,4 +29,7 @@ export class Companies {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @ManyToOne(() => Users, (company) => Companies)
+  user: Users;
 }

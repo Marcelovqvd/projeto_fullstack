@@ -30,6 +30,7 @@ export class LoginService {
 
       const token = sign({}, 'f3e4f8cc-333e-463d-a5f4-c98fcee52318', {
         subject: String(userExists.id),
+        expiresIn: '20s',
       });
 
       return { token };

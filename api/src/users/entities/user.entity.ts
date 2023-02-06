@@ -1,3 +1,4 @@
+import { Companies } from 'src/companies/entities/company.entity';
 import {
   Entity,
   Unique,
@@ -12,7 +13,7 @@ import {
 @Unique(['email'])
 export class Users {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column({ nullable: false, type: 'varchar', length: 100 })
   name: string;
@@ -28,4 +29,7 @@ export class Users {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(() => Companies, (user) => Users)
+  company: Companies[];
 }
