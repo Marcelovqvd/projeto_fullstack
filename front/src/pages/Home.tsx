@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Header from "../components/header/Header";
 
-
 export function Home() {
 	return (
 		<React.Fragment>
